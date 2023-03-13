@@ -40,6 +40,26 @@ ally writing it to system memory; however, it is the responsibility of the memor
 and update memory.
 
 ## AMD MOESI
+Implementations that support caching support a cache-coherency protocol for maintaining coherency 
+between main memory and the caches. The cache-coherency protocol is also used to maintain 
+coherency between all processors in a multiprocessor system. The cache-coherency protocol 
+supported by the AMD64 architecture is the MOESI (modified, owned, exclusive, shared, invalid) 
+protocol. The states of the MOESI protocol are:
+• Invalid—A cache line in the invalid state does not hold a valid copy of the data. Valid copies of the
+data can be either in main memory or another processor cache.
+• Exclusive—A cache line in the exclusive state holds the most recent, correct copy of the data. The
+copy in main memory is also the most recent, correct copy of the data. No other processor holds a
+copy of the data. 
+• Shared—A cache line in the shared state holds the most recent, correct copy of the data. Other
+processors in the system may hold copies of the data in the shared state, as well. If no other
+processor holds it in the owned state, then the copy in main memory is also the most recent. 
+• Modified—A cache line in the modified state holds the most recent, correct copy of the data. The
+copy in main memory is stale (incorrect), and no other processor holds a copy.
+• Owned—A cache line in the owned state holds the most recent, correct copy of the data. The
+owned state is similar to the shared state in that other processors can hold a copy of the most recent,
+correct data. Unlike the shared state, however, the copy in main memory can be stale (incorrect).
+Only one processor can hold the data in the owned state—all other processors must hold the data in
+the shared state.
 
 ## 优化:
 fetch
